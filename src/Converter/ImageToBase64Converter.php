@@ -15,7 +15,7 @@ final class ImageToBase64Converter implements FileConverterInterface
     /**
      * ImageToBase64Converter constructor.
      */
-    public function __construct(private NormalizerInterface $normalizer)
+    public function __construct(private NormalizerInterface $normalizer, private string $rootDir)
     {
     }
 
@@ -24,6 +24,6 @@ final class ImageToBase64Converter implements FileConverterInterface
      */
     public function convert(string $imagePath): string
     {
-        return (string) $this->normalizer->normalize(new \SplFileObject($imagePath));
+        return (string) $this->normalizer->normalize(new \SplFileObject($this->rootDir . $imagePath));
     }
 }
